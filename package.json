@@ -1,0 +1,128 @@
+{
+  "name": "agent-knowledge",
+  "version": "1.9.8",
+  "description": "Cross-session memory and recall for AI agents — git-synced knowledge base, knowledge graph, confidence scoring, hybrid semantic+TF-IDF search, auto-distillation with secrets scrubbing",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./lib": {
+      "types": "./dist/lib.d.ts",
+      "default": "./dist/lib.js"
+    },
+    "./dist/lib.js": {
+      "types": "./dist/lib.d.ts",
+      "default": "./dist/lib.js"
+    },
+    "./opencode": "./scripts/plugins/opencode/agent-knowledge.ts"
+  },
+  "bin": {
+    "agent-knowledge": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "scripts/",
+    "skills/",
+    ".claude-plugin/",
+    ".mcp.json",
+    "agent-desk-plugin.json",
+    "docs/*.md",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && node scripts/copy-ui.js",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "bench": "tsx bench/run.ts",
+    "bench:longmemeval": "tsx bench/longmemeval.ts",
+    "bench:longmemeval:matrix": "tsx bench/longmemeval-matrix.ts",
+    "bench:promote": "tsx bench/promote-bench.ts",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test",
+    "clean": "rm -rf dist",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "mcp",
+    "agent",
+    "memory",
+    "recall",
+    "session-search",
+    "knowledge-base",
+    "tfidf",
+    "embeddings",
+    "semantic-search",
+    "model-context-protocol",
+    "ai-agents",
+    "coding-assistants",
+    "claude-code",
+    "opencode"
+  ],
+  "author": "keshrath",
+  "mcpName": "io.github.keshrath/agent-knowledge",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshrath/agent-knowledge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/keshrath/agent-knowledge/issues"
+  },
+  "homepage": "https://github.com/keshrath/agent-knowledge#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "agent-common": "^1.1.2",
+    "better-sqlite3": "^12.8.0",
+    "morphdom": "^2.7.8",
+    "sqlite-vec": "^0.1.0",
+    "tree-sitter-wasms": "^0.1.13",
+    "vis-data": "^8.0.3",
+    "vis-network": "^10.0.2",
+    "web-tree-sitter": "^0.24.7",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/node": "^25.5.0",
+    "@types/stream-json": "^1.7.8",
+    "@types/ws": "^8.18.1",
+    "eslint": "^10.1.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.8.1",
+    "stream-json": "^2.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.57.2",
+    "vitest": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "@huggingface/transformers": "3.8.1"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,css,html}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}
